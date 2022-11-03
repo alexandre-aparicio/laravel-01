@@ -1,11 +1,12 @@
 <div>
-    <button type="button" wire:click="callFunction" class="btn btn-danger">Click Me</button>
-    <button type="button" wire:click="callFunctionArg({{ $user_id }})" class="btn btn-danger">Click Me!</button>
-    <p>{{ $message }}</p>
+    
     <div class="container">
-        @if ($createAccountError)
-        <div>{{ $createAccountError }}</div>
-    @endif
+        @if(session()->has('message'))
+            <div class="alert alert-success">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                {{ session('message') }}
+            </div>
+        @endif
         <div class="row">
             @foreach ($productos as $producto)
                 <div class="col-md-2">
@@ -27,3 +28,11 @@
         </div>
     </div>
 </div>
+<script>
+$(document).ready(function(){
+    window.livewire.on('alert_remove',()=>{
+        setTimeout(function(){ $(".alert-success").fadeOut('fast');
+        }, 1000); // 1 secs
+    });
+});
+</script>

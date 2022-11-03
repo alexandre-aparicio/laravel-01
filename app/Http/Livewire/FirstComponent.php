@@ -8,11 +8,10 @@ use App\Models\Wishlist;
 
 class FirstComponent extends Component
 {
-    public $message = '';
-    public $user_id = 42;
+   
 
     public $productos;
-    public $createAccountError;
+    
 
     public function mount() 
     {
@@ -21,36 +20,56 @@ class FirstComponent extends Component
 
     public function addToWishList(int $product_id){
         
+        // 
+
+        // Cuando se tienen dos campos id_usuario y Id_producto se puede hacer con una coincidancia de los dos camps
+        // Wishlist::where('producto_id', $product_id)->where('user_id', $usuario_id)->exists()
+        
+        if(Wishlist::where('producto_id', $product_id)->exists()) {
+
+        session()->flash('message','Ya se ha añadido este producto a tu lista de favoritos');
+        $this->emit('alert_remove');
+        return;
+
+        } else {
+
+            $wishlist = Wishlist::create([
+                'producto_id' => $product_id
+            ]);
+
+        session()->flash('message','Añadido con éxito');
+        $this->emit('alert_remove');
+        return;
+
+        }
+
+        
+/*
+       Cuando la tabla esta limitada a unic entrada en id_producto (tabla -> wishlist) se puede utilizar try/catch
+        
         try {
             
             $wishlist = Wishlist::create([
                 'producto_id' => $product_id
             ]);
 
+        session()->flash('message','Añadido con éxito');
+        $this->emit('alert_remove');
+        return;
+
     } catch (\Exception $e) {
 
   
-        $this->addError('error', 'Dramatic error you will die.');
-
-        $this->createAccountError = 'Dramatic error you will die.';
+        session()->flash('message','Ya se ha añadido este producto a tu lista de favoritos');
+        $this->emit('alert_remove');
+        return;
     
     }
+    */
         
     }
    
-  
-   
-    public function callFunction()
-    {
-        $this->message = "You clicked on button";
-    }
-  
-    
-    public function callFunctionArg($user_id)
-    {
-        $this->message = $user_id;
-        $this->user_id = $this->message + 1;
-    }
+
 
     public function render()
     {
