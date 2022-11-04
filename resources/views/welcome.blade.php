@@ -19,8 +19,9 @@
     </style>
 </head>
 <body>
-    @livewire('menu-sup')
-    @livewire('first-component')
+  <nav>@livewire('menu-sup')</nav>
+    
+  <div>@livewire('first-component')</div>  
   </div>
 
   @livewireScripts

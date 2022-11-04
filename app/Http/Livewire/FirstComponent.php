@@ -11,7 +11,16 @@ class FirstComponent extends Component
    
 
  
-    public $color;
+    public $color, $productos;
+    protected $listeners = ['logro2'=>'mount'];
+
+    public function mount()
+    {
+        $this->getProductos();
+        
+    }
+
+    
     
 
    
@@ -28,22 +37,45 @@ class FirstComponent extends Component
         session()->flash('message','Ya se ha añadido este producto a tu lista de favoritos');
         $this->color = "alert-danger";
         $this->emit('alert_remove');
-        return;
+        
+        
 
         } else {
 
             $wishlist = Wishlist::create([
                 'producto_id' => $product_id
             ]);
+            $this->emit('logro');
 
         session()->flash('message','Añadido con éxito');
         $this->color = "alert-success";
         $this->emit('alert_remove');
-        return;
+        
+       
 
         }
 
         
+
+        
+    }
+   
+
+   
+
+
+    public function render()
+    {
+        
+        return view('livewire.first-component');
+    }
+
+    public function getProductos(){
+        $this->productos = Producto::all();
+    }
+}
+
+
 /*
        Cuando la tabla esta limitada a unic entrada en id_producto (tabla -> wishlist) se puede utilizar try/catch
         
@@ -66,14 +98,3 @@ class FirstComponent extends Component
     
     }
     */
-        
-    }
-   
-
-
-    public function render()
-    {
-        $productos = Producto::all();
-        return view('livewire.first-component', ['productos' => $productos]);
-    }
-}

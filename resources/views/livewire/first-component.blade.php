@@ -2,7 +2,7 @@
     
     <div class="container">
         @if(session()->has('message'))
-            <div class="alert {{$color}}">
+            <div class="alert {{$color}} position-absolute top-0 start-0">
                 
                 {{ session('message') }}
             </div>
