@@ -2,11 +2,12 @@
     <div class="container">
         <h1>Wish List con Laravel LiveWire</h1>
         <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                data-bs-toggle="dropdown" aria-expanded="false">
-                Wish List
-            </button>
-            <ul class="dropdown-menu largo" aria-labelledby="dropdownMenuButton1">
+            <div class="num-wishlist">{{ $numero }}</div>
+            <a class="dropdown-toggle" type="button" id="my-dropdown-toggle"
+                data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-shopping-bag fa-xl"></i>
+                
+        </a>
+            <ul class="dropdown-menu largo" aria-labelledby="my-dropdown-toggle">
                 
                 @foreach ($prowish as $pr)
                 

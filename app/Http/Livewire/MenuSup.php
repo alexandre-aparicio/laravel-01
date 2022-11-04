@@ -10,14 +10,15 @@ class MenuSup extends Component
 {      
 
 
-    public $logro;
+    public $numero;
     protected $listeners = ['logro'=>'mount'];
     public $prowish;
     
 
     public function mount()
     {
-        return $this->prowish = Wishlist::all();
+        $this->numero = Wishlist::count();
+        $this->prowish = Wishlist::all();
          
         
     }
