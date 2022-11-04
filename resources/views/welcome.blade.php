@@ -9,11 +9,18 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
   @livewireStyles
+  <style>
+    .image-parent {
+  max-width: 80px;
+}
+.largo {
+    width:420px;
+}
+    </style>
 </head>
 <body>
-  <div class="container">
-      <h1>Esta es la página de inicio</h1>
-      @livewire('first-component')
+    @livewire('menu-sup')
+    @livewire('first-component')
   </div>
 
   @livewireScripts

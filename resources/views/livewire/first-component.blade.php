@@ -2,8 +2,8 @@
     
     <div class="container">
         @if(session()->has('message'))
-            <div class="alert alert-success">
-                <button type="button" class="close" data-dismiss="alert">×</button>
+            <div class="alert {{$color}}">
+                
                 {{ session('message') }}
             </div>
         @endif
@@ -31,7 +31,7 @@
 <script>
 $(document).ready(function(){
     window.livewire.on('alert_remove',()=>{
-        setTimeout(function(){ $(".alert-success").fadeOut('fast');
+        setTimeout(function(){ $(".alert").fadeOut('fast');
         }, 1000); // 1 secs
     });
 });

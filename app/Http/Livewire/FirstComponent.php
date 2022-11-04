@@ -10,13 +10,11 @@ class FirstComponent extends Component
 {
    
 
-    public $productos;
+ 
+    public $color;
     
 
-    public function mount() 
-    {
-        $this->productos = Producto::all();
-    }
+   
 
     public function addToWishList(int $product_id){
         
@@ -28,6 +26,7 @@ class FirstComponent extends Component
         if(Wishlist::where('producto_id', $product_id)->exists()) {
 
         session()->flash('message','Ya se ha añadido este producto a tu lista de favoritos');
+        $this->color = "alert-danger";
         $this->emit('alert_remove');
         return;
 
@@ -38,6 +37,7 @@ class FirstComponent extends Component
             ]);
 
         session()->flash('message','Añadido con éxito');
+        $this->color = "alert-success";
         $this->emit('alert_remove');
         return;
 
@@ -73,6 +73,7 @@ class FirstComponent extends Component
 
     public function render()
     {
-        return view('livewire.first-component');
+        $productos = Producto::all();
+        return view('livewire.first-component', ['productos' => $productos]);
     }
 }
